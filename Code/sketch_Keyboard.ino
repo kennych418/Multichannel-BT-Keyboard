@@ -24,14 +24,26 @@
 #define OUT8 13
 #define OUT9 5
 
+#define UNIQUE1 (outPin==4&&inPin==8)
+#define UNIQUE2 (outPin==5&&inPin==8)
+#define UNIQUE3 (outPin==3&&inPin==8)
+#define UNIQUE4 (outPin==2&&inPin==8)
+
+#define MAXROLLOVER 6
+#define RCTIMECONST 1800  //in microseconds
+#define REPORTDELAY 10    //in milliseconds
+
 int pressedButtons[8] = {0};
-uint8_t pressedKeys[6] = {0};
-uint8_t keys[6] = {0x00};
-uint8_t modifier = 0x00;
+
+//outPin = row, inPin = col
+extern uint8_t scancodeBank[9][8]; 
+extern uint8_t modifierBank[9][8];
 
 SoftwareSerial bluetooth1(NULL, bluetooth1Rx);
 SoftwareSerial bluetooth2(NULL, bluetooth2Rx);
 SoftwareSerial bluetooth3(NULL, bluetooth3Rx);
+
+SoftwareSerial* activePort = &bluetooth3;
 
 void setup()
 {
@@ -76,60 +88,63 @@ void setup()
   bluetooth1.print("$");  // Print three times individually
   bluetooth1.print("$");
   bluetooth1.print("$");  // Enter command mode
-  delay(100);
+  delay(REPORTDELAY);
   bluetooth1.print("S~,6\n");  // Enter enable HID
-  delay(100);
+  delay(REPORTDELAY);
   bluetooth1.print("R,1\n");   // Restart with HID
-  delay(100);
+  delay(REPORTDELAY);
 
   bluetooth2.print("$");  // Print three times individually
   bluetooth2.print("$");
   bluetooth2.print("$");  // Enter command mode
-  delay(100);
+  delay(REPORTDELAY);
   bluetooth2.print("S~,6\n");  // Enter enable HID
-  delay(100);
+  delay(REPORTDELAY);
   bluetooth2.print("R,1\n");   // Restart with HID
-  delay(100);
+  delay(REPORTDELAY);
 
   bluetooth3.print("$");  // Print three times individually
   bluetooth3.print("$");
   bluetooth3.print("$");  // Enter command mode
-  delay(100);
+  delay(REPORTDELAY);
   bluetooth3.print("S~,6\n");  // Enter enable HID
-  delay(100);
+  delay(REPORTDELAY);
   bluetooth3.print("R,1\n");   // Restart with HID
-  delay(100);
+  delay(REPORTDELAY);
 }
 
 void loop()
 {
+  uint8_t pressedKeys[MAXROLLOVER] = {0};
   int numPressed = 0;
-  
-  PORTB |= IN2;
-  readKeys(1, pressedButtons);
+  uint8_t modifier = 0x00;
 
-  if(pressedButtons[0] == 0){
-    pressedKeys[0] = 0x04;
-    sendReport(pressedKeys, 0x00);
+  for( int outPin = 1; outPin < 10; outPin++){
+    PORTD |= IN5;
+    PORTB |= IN2;
+    readKeys(outPin, pressedButtons);
+    for( int inPin = 1; inPin < 9; inPin++){
+
+      if(!pressedButtons[inPin-1]){
+        modifier |= modifierBank[outPin-1][inPin-1];
+        if(scancodeBank[outPin-1][inPin-1] != 0x00 && numPressed < MAXROLLOVER){
+          pressedKeys[numPressed] = scancodeBank[outPin-1][inPin-1];
+          numPressed++;
+        }
+        if(UNIQUE1)
+          activePort = &bluetooth1;
+        if(UNIQUE2)
+          activePort = &bluetooth2;
+        if(UNIQUE3)
+          activePort = &bluetooth3;
+      }
+    
+    
+    }
   }
-  else{
-    pressedKeys[0] = 0x00;
-    sendReport(pressedKeys, 0x00);
-  }
-  /*PORTB |= IN2;
-  readKeys(2, pressedButtons);
-  PORTB |= IN2;
-  readKeys(3, pressedButtons);
-  PORTB |= IN2;
-  readKeys(4, pressedButtons);
-  PORTB |= IN2;
-  readKeys(5, pressedButtons);
-  PORTB |= IN2;
-  readKeys(6, pressedButtons);
-  PORTB |= IN2;
-  readKeys(7, pressedButtons);
-  PORTB |= IN2;
-  readKeys(8, pressedButtons);
-  PORTB |= IN2;
-  readKeys(9, pressedButtons);*/
+
+  //Serial.print(pressedKeys[0]); Serial.print(", "); Serial.print(pressedKeys[1]); Serial.print(", "); Serial.print(pressedKeys[2]); Serial.print(", "); Serial.print(pressedKeys[3]); Serial.print(", "); Serial.print(pressedKeys[4]); Serial.print(", "); Serial.println(pressedKeys[5]);
+
+  sendReport(activePort, pressedKeys, modifier);
+  
 }
