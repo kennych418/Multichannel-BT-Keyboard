@@ -4,7 +4,8 @@
 All commands are entered in command mode with a 10ms delay between each one. Exit command mode and save with **R,1\n**.  
 Enable HID mode with **S~,6\n**.  
 Enable authentication mode 0 with **SA,0\n**. Default pin is 1234.  
-Configure flag register with **SH,<value>**, where value is 4 hex characters. Set bits 0-3 high (0x020F).  
+Configure the device name with **SN,`value`**, where value is an up to 20 character alphanumeric string.
+Configure flag register with **SH,`value`**, where value is 4 hex characters. Set bits 0-3 high (0x020F).  
 Enable auto-reconnect with **SM,6\n**.  
 
 ## Future Improvements
