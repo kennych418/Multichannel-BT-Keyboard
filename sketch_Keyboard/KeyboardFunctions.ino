@@ -22,6 +22,25 @@ void readKeys(int LOWOUT, int* buff){
   buff[7] = digitalRead(IN8);
 }
 
+void configure(SoftwareSerial* bluetooth, String name){
+  bluetooth->print("$");              
+  bluetooth->print("$");              // Print three times individually
+  bluetooth->print("$");              // Enter command mode
+  delay(REPORTDELAY);
+  bluetooth->print("S~,6\n");         // Enable HID mode
+  delay(REPORTDELAY);
+  bluetooth->print("SA,0\n");         // Set authentication mode to 0
+  delay(REPORTDELAY);
+  bluetooth->print("SN,"+name+"\n");  // Set device name
+  delay(100);
+  bluetooth->print("SH,0207\n");      // Set flag register
+  delay(REPORTDELAY);
+  bluetooth->print("SM,6\n");         // Set auto-reconnect mode
+  delay(REPORTDELAY);
+  bluetooth->print("R,1\n");          // Restart with HID
+  delay(REPORTDELAY);
+}
+
 void sendReport(SoftwareSerial* bluetooth, uint8_t keys[], uint8_t modifier){
   bluetooth->write((uint8_t)0xFD);
   bluetooth->write((uint8_t)0x09);

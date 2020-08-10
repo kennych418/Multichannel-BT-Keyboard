@@ -1,9 +1,9 @@
 #include <Keyboard.h>
 #include <SoftwareSerial.h>  
 
-#define bluetooth1Rx 1
+#define bluetooth1Rx 12
 #define bluetooth2Rx 4
-#define bluetooth3Rx 12
+#define bluetooth3Rx 1
 
 #define IN1 10
 #define IN2 (1 << 0)  //Arduino IDE doesnt let me use PB0 >:(
@@ -85,32 +85,10 @@ void setup()
   bluetooth2.begin(115200);  // The Bluetooth Mate defaults to 115200bps
   bluetooth3.begin(115200);  // The Bluetooth Mate defaults to 115200bps
 
-  bluetooth1.print("$");  // Print three times individually
-  bluetooth1.print("$");
-  bluetooth1.print("$");  // Enter command mode
-  delay(REPORTDELAY);
-  bluetooth1.print("S~,6\n");  // Enter enable HID
-  delay(REPORTDELAY);
-  bluetooth1.print("R,1\n");   // Restart with HID
-  delay(REPORTDELAY);
-
-  bluetooth2.print("$");  // Print three times individually
-  bluetooth2.print("$");
-  bluetooth2.print("$");  // Enter command mode
-  delay(REPORTDELAY);
-  bluetooth2.print("S~,6\n");  // Enter enable HID
-  delay(REPORTDELAY);
-  bluetooth2.print("R,1\n");   // Restart with HID
-  delay(REPORTDELAY);
-
-  bluetooth3.print("$");  // Print three times individually
-  bluetooth3.print("$");
-  bluetooth3.print("$");  // Enter command mode
-  delay(REPORTDELAY);
-  bluetooth3.print("S~,6\n");  // Enter enable HID
-  delay(REPORTDELAY);
-  bluetooth3.print("R,1\n");   // Restart with HID
-  delay(REPORTDELAY);
+  //configure(&bluetooth1, "Version 4, CH1");   //Reserved for first time setup
+  //configure(&bluetooth2, "Version 4, CH2");
+  //configure(&bluetooth3, "Version 4, CH3");
+  
 }
 
 void loop()
@@ -120,6 +98,7 @@ void loop()
   uint8_t modifier = 0x00;
 
   for( int outPin = 1; outPin < 10; outPin++){
+  
     PORTD |= IN5;
     PORTB |= IN2;
     readKeys(outPin, pressedButtons);
