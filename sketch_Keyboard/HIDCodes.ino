@@ -166,12 +166,12 @@ uint8_t scancodeBank[9][8] = { {KEY_GRAVE,      KEY_NONE,     KEY_SPACE,    KEY_
                                {KEY_A,          KEY_E,        KEY_G,        KEY_N,     KEY_0,      KEY_EQUAL,        KEY_DOWN,         KEY_NONE},    // A, E, G, N, 0, =, DownArrow, None
                                {KEY_Z,          KEY_D,        KEY_V,        KEY_8,     KEY_P,      KEY_RIGHTBRACE,   KEY_NONE,         KEY_NONE} };  // Z, D, V, 8, P, ], ArrowKeysRightButton, None
 
-uint8_t modifierBank[9][8] = { {KEY_NONE,       KEY_NONE,     KEY_NONE,     KEY_NONE,  KEY_NONE,   KEY_NONE,         KEY_NONE,         KEY_NONE},
-                               {KEY_NONE,       KEY_NONE,     KEY_NONE,     KEY_NONE,  KEY_NONE,   KEY_NONE,         KEY_NONE,         KEY_NONE},
-                               {KEY_NONE,       KEY_NONE,     KEY_NONE,     KEY_NONE,  KEY_NONE,   KEY_NONE,         KEY_NONE,         KEY_NONE},
-                               {KEY_MOD_LSHIFT, KEY_NONE,     KEY_NONE,     KEY_NONE,  KEY_NONE,   KEY_NONE,         KEY_NONE,         KEY_NONE},    //LShift
-                               {KEY_MOD_LCTRL,  KEY_NONE,     KEY_NONE,     KEY_NONE,  KEY_NONE,   KEY_NONE,         KEY_NONE,         KEY_NONE},    //LCtrl
-                               {KEY_NONE,       KEY_MOD_LALT, KEY_NONE,     KEY_NONE,  KEY_NONE,   KEY_NONE,         KEY_NONE,         KEY_NONE},    //LAlt
-                               {KEY_NONE,       KEY_NONE,     KEY_NONE,     KEY_NONE,  KEY_NONE,   KEY_NONE,         KEY_NONE,         KEY_NONE},    
-                               {KEY_NONE,       KEY_NONE,     KEY_NONE,     KEY_NONE,  KEY_NONE,   KEY_NONE,         KEY_NONE,         KEY_NONE},
-                               {KEY_NONE,       KEY_NONE,     KEY_NONE,     KEY_NONE,  KEY_NONE,   KEY_NONE,         KEY_NONE,         KEY_NONE} };
+uint8_t modifierBank[9][8] = { {KEY_NONE,       KEY_MOD_LMETA,     KEY_NONE,     KEY_NONE,  KEY_NONE,   KEY_NONE,         KEY_NONE,         KEY_NONE}, //Meta
+                               {KEY_NONE,       KEY_NONE,          KEY_NONE,     KEY_NONE,  KEY_NONE,   KEY_NONE,         KEY_NONE,         KEY_NONE},
+                               {KEY_NONE,       KEY_NONE,          KEY_NONE,     KEY_NONE,  KEY_NONE,   KEY_NONE,         KEY_NONE,         KEY_NONE},
+                               {KEY_MOD_LSHIFT, KEY_NONE,          KEY_NONE,     KEY_NONE,  KEY_NONE,   KEY_NONE,         KEY_NONE,         KEY_NONE},    //LShift
+                               {KEY_MOD_LCTRL,  KEY_NONE,          KEY_NONE,     KEY_NONE,  KEY_NONE,   KEY_NONE,         KEY_NONE,         KEY_NONE},    //LCtrl
+                               {KEY_NONE,       KEY_MOD_LALT,      KEY_NONE,     KEY_NONE,  KEY_NONE,   KEY_NONE,         KEY_NONE,         KEY_NONE},    //LAlt
+                               {KEY_NONE,       KEY_NONE,          KEY_NONE,     KEY_NONE,  KEY_NONE,   KEY_NONE,         KEY_NONE,         KEY_NONE},    
+                               {KEY_NONE,       KEY_NONE,          KEY_NONE,     KEY_NONE,  KEY_NONE,   KEY_NONE,         KEY_NONE,         KEY_NONE},
+                               {KEY_NONE,       KEY_NONE,          KEY_NONE,     KEY_NONE,  KEY_NONE,   KEY_NONE,         KEY_NONE,         KEY_NONE} };
