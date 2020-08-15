@@ -37,7 +37,11 @@ void configure(SoftwareSerial* bluetooth, String name){
   delay(REPORTDELAY);
   bluetooth->print("SM,6\n");         // Set auto-reconnect mode
   delay(REPORTDELAY);
-  bluetooth->print("R,1\n");          // Restart with HID
+  bluetooth->print("SW,8050\n");      // Set sniff mode
+  delay(REPORTDELAY);
+  bluetooth->print("S|,0201\n");      // Set low-power connect mode
+  delay(REPORTDELAY);
+  bluetooth->print("R,1\n");          // Restart with changes
   delay(REPORTDELAY);
 }
 
