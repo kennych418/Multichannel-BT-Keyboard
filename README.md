@@ -15,6 +15,8 @@ We chose to use the ATMega32u4 microcontroller because of its high number of GPI
 The RN42 bluetooth module .
 
 ## PCB
+There are many ways to design a PCB and we won't be discussing design practices. The main priority behind our PCB design was to avoid bottlenecking high current components, like the microcontroller, bluetooth modules, voltage regulator, and batteries. Since the keyboard is primarily digital, the rest of the design simply aims to connect signals together with traces. 
+
 
 
 ## Files
