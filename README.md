@@ -1,6 +1,27 @@
-# Multichannel-BT-Keyboard
+# Multichannel BT Keyboard
+When someone has to work with multiple devices, whether it's a home computer, work laptop, or mobile tablet, they have to switch between multiple keyboards to type to each device. This is inconvenient for anyone who values their desk space or hates the soulcrushing burden of having to move your hands a couple degrees. The multichannel BT keyboard is designed to simplify transitions between devices by connecting to up to three different devices and changing the target with the press of a button. 
 
-Complete documentation coming soon.
+INSERT PHOTO HERE
+
+## Schematic
+The significant hardware decisions are listed below. 
+* ATMega32u4 Microcontroller
+* RN42 Bluetooth Module
+* MIC4680 Voltage Regulator
+* ______ Diodes
+
+We chose to use the ATMega32u4 microcontroller because of its high number of GPIO pins and compatibility with the Arduino IDE. It provides just the right number of GPIO pins to act as inputs and outputs for 72 keys. The Arduino IDE simplifies the programming for the keyboard's firmware. Along with that, there is a lot of online support for Arduino devices and projects.
+
+The RN42 bluetooth module .
+
+## PCB
+
+
+## Files
+
+
+## CAD Models
+
 
 ## RN42 First Time Setup
 All commands are entered in command mode with a 10ms delay between each one. Exit command mode and save with **R,1\n**.  
